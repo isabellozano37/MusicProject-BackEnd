@@ -12,6 +12,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddScoped<IUsersService, UsersService>();
 
 builder.Services.AddDbContext<ServiceContext>(
@@ -19,6 +30,7 @@ builder.Services.AddDbContext<ServiceContext>(
 options.UseSqlServer("name=ConnectionStrings:ServiceContext"));
 
 var app = builder.Build();
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -34,3 +46,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
