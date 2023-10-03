@@ -64,7 +64,7 @@ In the context of databases, an entity is an abstraction that represents an obje
 
 For example, in a product management application, you could have an entity called "Product" that represents the different available products. Each row in the "Product" table would be an individual instance of a product with its specific attributes, such as the product name, price, description, etc.
 
-**4. Multiverse: The body of the application where different functionalities, interfaces, and services will be found that the application will provide:**
+**4. The body of the application where different functionalities, interfaces, and services will be found that the application will provide:**
 WebApplication1 refers to the main body of the web application. It includes the code that implements various functionalities, user interfaces, and services that the application will offer to its users. This is the part where the logic of the application resides, and it interacts with the API or database to perform specific tasks and provide the intended features to the users.
 
   **4.1. Controller: Functions that we are going to give to the different layers of the API:**
