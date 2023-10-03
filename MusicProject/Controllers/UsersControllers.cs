@@ -1,12 +1,13 @@
 ﻿using Data;
-using Microsoft.AspNetCore.Mvc;
-//using System.Web.Http.Cors;
-using MusicProject.IService;
-using System.Security.Authentication;
 using Entities;
-using MusicProject.Service;
+using Microsoft.AspNetCore.Mvc;
+using MusicProject.IService;
 using Microsoft.AspNetCore.Cors;
-//using Microsoft.EntityFrameworkCore;
+using MusicProject.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace MusicProject.Controllers
 {
@@ -15,11 +16,13 @@ namespace MusicProject.Controllers
     [Route("[controller]/[action]")]
     public class UsersControllers : ControllerBase
     {
+        private readonly IConfiguration _configuration;
         private readonly IUsersService _userService;
         private readonly ServiceContext _serviceContext;
 
-        public UsersControllers(IUsersService userService, ServiceContext serviceContext)
+        public UsersControllers(IConfiguration configuration ,IUsersService userService, ServiceContext serviceContext)
         {
+            _configuration = configuration;
             _userService = userService;
             _serviceContext = serviceContext;
         }
@@ -29,9 +32,11 @@ namespace MusicProject.Controllers
         {
             try
             {
+
                 // Verifica si la contraseña es lo suficientemente larga (por ejemplo, al menos 8 caracteres)
-                if (users.Password.Length < 8)
+                if (Users.Password.Length < 8)
                 {
+                    // Contraseña inválida, devolver un código de estado 400 (Bad Request)
                     return BadRequest("La contraseña debe tener al menos 8 caracteres.");
                 }
 
@@ -41,6 +46,7 @@ namespace MusicProject.Controllers
                     // Si no se proporcionó un valor manualmente, establece el valor predeterminado (2)
                     users.Id_Roll = 2;
                 }
+
                 return Ok(_userService.InsertUsers(users));
             }
             catch (Exception ex)
@@ -49,66 +55,112 @@ namespace MusicProject.Controllers
             }
         }
 
-        [HttpPut(Name = "UpdateUser")]
-        public IActionResult UpdateUser(string UserName, [FromBody] Users updatedUser)
+        [HttpPost]
+        public IActionResult Login([FromBody] LoginRequestModel loginRequest)
         {
-            var user = _serviceContext.Users.FirstOrDefault(p => p.UserName == UserName);
+            try
+            {
+                var user = _serviceContext.Users.FirstOrDefault(u => u.UserName == loginRequest.UserName);
 
-                if (user != null)
+                if (user != null && BCrypt.Net.BCrypt.Verify(loginRequest.Password, user.Password))
                 {
-                    user.FirstName = updatedUser.FirstName;
-                    user.LastName = updatedUser.LastName;
-                    user.UserName = updatedUser.UserName;
-                    user.Email = updatedUser.Email;
-                    user.Password = updatedUser.Password;
-
-                    _serviceContext.SaveChanges();
-
-                    return Ok("El ususario se ha actualizado correctamente.");
+                    var token = GenerateJwtToken(user);
+                    return Ok(new { Token = token });
+                    //return StatusCode(200, "Inicio de sesión exitoso");
                 }
                 else
                 {
-                    return NotFound("No se ha encontrado el usuario con el identificador especificado.");
+                    return StatusCode(401, "Credenciales incorrectas");
                 }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al iniciar sesión: {ex.Message}");
+            }
         }
 
-        [HttpGet(Name = "GetUsers")]
-        public IActionResult GetUsers([FromQuery] string UserName, [FromQuery] string Password)
+        private string GenerateJwtToken(Users user)
         {
-            var seletedUser = _serviceContext.Set<Users>()
-                               .Where(u => u.UserName == UserName
-                                    && u.Password == Password
-                                    && u.Id_Roll == 1)
-                                .FirstOrDefault();
-
-            if (seletedUser != null)
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Secret"]);
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                var Users = _serviceContext.Users.ToList();
-
-                return Ok(Users);
-            }
-            else
-            {
-                return Unauthorized("El usuario no está autorizado o no existe");
-            }
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id_Users.ToString()),
+                    // Otros claims si es necesario
+                }),
+                Expires = DateTime.UtcNow.AddHours(1), // Duración del token
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature
+                ),
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
-        [HttpDelete(Name = "DeleteUser")]
-        public IActionResult DeleteUser(string UserName)
-        {
-            var user = _serviceContext.Users.FirstOrDefault(p => p.UserName == UserName);
 
-            if (user != null)
-             {
-                    _serviceContext.Users.Remove(user);
-                    _serviceContext.SaveChanges();
+        //[HttpPut(Name = "UpdateUser")]
+        //public IActionResult UpdateUser(string UserName, [FromBody] Users updatedUser)
+        //{
+        //    var user = _serviceContext.Users.FirstOrDefault(p => p.UserName == UserName);
 
-                    return Ok("El usuario se ha eliminado correctamente.");
-            }
-            else
-            {
-                    return NotFound("No se ha encontrado el usuario con el identificador especificado.");
-            }
-        }
+        //        if (user != null)
+        //        {
+        //            user.FirstName = updatedUser.FirstName;
+        //            user.LastName = updatedUser.LastName;
+        //            user.UserName = updatedUser.UserName;
+        //            user.Email = updatedUser.Email;
+        //            user.Password = updatedUser.Password;
+
+        //            _serviceContext.SaveChanges();
+
+        //            return Ok("El ususario se ha actualizado correctamente.");
+        //        }
+        //        else
+        //        {
+        //            return NotFound("No se ha encontrado el usuario con el identificador especificado.");
+        //        }
+        //}
+
+        //[HttpGet(Name = "GetUsers")]
+        //public IActionResult GetUsers([FromQuery] string UserName, [FromQuery] string Password)
+        //{
+        //    var seletedUser = _serviceContext.Set<Users>()
+        //                       .Where(u => u.UserName == UserName
+        //                            && u.Password == Password
+        //                            && u.Id_Roll == 1)
+        //                        .FirstOrDefault();
+
+        //    if (seletedUser != null)
+        //    {
+        //        var Users = _serviceContext.Users.ToList();
+
+        //        return Ok(Users);
+        //    }
+        //    else
+        //    {
+        //        return Unauthorized("El usuario no está autorizado o no existe");
+        //    }
+        //}
+
+        //[HttpDelete(Name = "DeleteUser")]
+        //public IActionResult DeleteUser(string UserName)
+        //{
+        //    var user = _serviceContext.Users.FirstOrDefault(p => p.UserName == UserName);
+
+        //    if (user != null)
+        //     {
+        //            _serviceContext.Users.Remove(user);
+        //            _serviceContext.SaveChanges();
+
+        //            return Ok("El usuario se ha eliminado correctamente.");
+        //    }
+        //    else
+        //    {
+        //            return NotFound("No se ha encontrado el usuario con el identificador especificado.");
+        //    }
+        //}
     }
 }
