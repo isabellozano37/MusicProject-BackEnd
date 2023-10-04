@@ -69,5 +69,24 @@ namespace MusicProject.Controllers
                 return Unauthorized("El usuario no está autorizado o no existe");
             }
         }
+
+        [HttpDelete(Name = "DeleteUser")]
+        public IActionResult DeleteUser(string UserName)
+        {
+            var user = _serviceContext.Users.FirstOrDefault(p => p.UserName == UserName);
+
+            if (user != null)
+            {
+                _serviceContext.Users.Remove(user);
+                _serviceContext.SaveChanges();
+
+                return Ok("El usuario se ha eliminado correctamente.");
+            }
+            else
+            {
+                return NotFound("No se ha encontrado el usuario con el identificador especificado.");
+            }
+        }
+
     }
 }
