@@ -32,12 +32,17 @@ namespace MusicProject.Controllers
         {
             try
             {
-
                 // Verifica si la contraseña es lo suficientemente larga (por ejemplo, al menos 8 caracteres)
                 if (Users.Password.Length < 8)
                 {
                     // Contraseña inválida, devolver un código de estado 400 (Bad Request)
                     return BadRequest("La contraseña debe tener al menos 8 caracteres.");
+                }
+
+                // Verificar si el UserName ya existe en la base de datos
+                if (_userService.IsUserNameExists(users.UserName))
+                {
+                    return Conflict("El nombre de usuario ya está en uso.");
                 }
 
                 // Verifica si se proporcionó manualmente un valor para Id_rol en Swagger
