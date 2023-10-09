@@ -1,5 +1,6 @@
 ﻿using Data;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using MusicProject.IService;
 
 namespace MusicProject.Service
@@ -16,5 +17,6 @@ namespace MusicProject.Service
             _serviceContext.SaveChanges();
             return Users.Id_Users;
         }
+
     }
 }
