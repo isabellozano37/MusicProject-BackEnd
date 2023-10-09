@@ -4,19 +4,21 @@ using System.Web.Http.Cors;
 using MusicProject.IService;
 using System.Security.Authentication;
 using Entities;
+using MusicProject.Service;
 
 namespace MusicProject.Controllers
 {
+
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Route("[controller]/[action]")]
     public class UsersControllers : ControllerBase
     {
-        private readonly IUsersService _userService;
+        private readonly UsersService _userService;
         private readonly ServiceContext _serviceContext;
 
         public UsersControllers(IUsersService userService, ServiceContext serviceContext)
         {
-            _userService = userService;
+            _userService =(UsersService?)userService;
             _serviceContext = serviceContext;
         }
 
@@ -24,6 +26,7 @@ namespace MusicProject.Controllers
         public int Post([FromBody] Users Users)
         {
           return _userService.InsertUsers(Users);  
+
         }
 
         [HttpPut(Name = "UpdateUser")]
@@ -88,5 +91,5 @@ namespace MusicProject.Controllers
             }
         }
 
-    }
+    }       
 }
