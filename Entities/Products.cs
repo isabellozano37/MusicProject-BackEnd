@@ -14,7 +14,8 @@ namespace Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id_Product { get; set; }
-        public string Imagen { get; set; }
+        public string ProductsName { get; set; }
+        public string Imagen { get; set; } 
         public string SongName { get; set; }
         public string FilmName { get; set; }
         public string Audio { get; set; }
@@ -25,5 +26,6 @@ namespace Entities
         [JsonIgnore]
         public virtual Categories Categories { get; set; }
         public ICollection<DetailList> DetailList { get; set; }
+        public int Id_Products { get; set; }
     }
 }
