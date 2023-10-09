@@ -6,6 +6,5 @@ namespace MusicProject.IService
     {
         int InsertUsers(Users Users);
 
-        bool IsUserNameExists(string UserName);
     }
 }

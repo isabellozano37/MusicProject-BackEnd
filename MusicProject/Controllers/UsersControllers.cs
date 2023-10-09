@@ -33,17 +33,12 @@ namespace MusicProject.Controllers
             try
             {
                 // Verifica si la contraseña es lo suficientemente larga (por ejemplo, al menos 8 caracteres)
-                if (Users.Password.Length < 8)
+                if (users.Password.Length < 4)
                 {
                     // Contraseña inválida, devolver un código de estado 400 (Bad Request)
-                    return BadRequest("La contraseña debe tener al menos 8 caracteres.");
+                    return BadRequest("La contraseña debe tener al menos 4 caracteres.");
                 }
 
-                // Verificar si el UserName ya existe en la base de datos
-                if (_userService.IsUserNameExists(users.UserName))
-                {
-                    return Conflict("El nombre de usuario ya está en uso.");
-                }
 
                 // Verifica si se proporcionó manualmente un valor para Id_rol en Swagger
                 if (users.Id_Roll == 0)
@@ -67,10 +62,12 @@ namespace MusicProject.Controllers
             {
                 var user = _serviceContext.Users.FirstOrDefault(u => u.UserName == loginRequest.UserName);
 
-                if (user != null && BCrypt.Net.BCrypt.Verify(loginRequest.Password, user.Password))
+                //if (user != null && BCrypt.Net.BCrypt.Verify(loginRequest.Password, user.Password))
+                if (user != null && loginRequest.Password == user.Password)
                 {
                     var token = GenerateJwtToken(user);
-                    return Ok(new { Token = token });
+                    return Ok(new { Token = token, Role = user.Id_Roll});
+                    //return Ok(new { Token = token });
                     //return StatusCode(200, "Inicio de sesión exitoso");
                 }
                 else
@@ -93,6 +90,7 @@ namespace MusicProject.Controllers
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Id_Users.ToString()),
+                    new Claim(ClaimTypes.Role, user.Id_Roll.ToString())
                     // Otros claims si es necesario
                 }),
                 Expires = DateTime.UtcNow.AddHours(1), // Duración del token
