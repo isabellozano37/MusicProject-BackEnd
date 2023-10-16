@@ -23,6 +23,7 @@ namespace Data
         public DbSet<Categories> Categories { get; set; }
         public DbSet<MyLists> MyLists { get; set; }
         public DbSet<DetailList> DetailList { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Users>(entity =>

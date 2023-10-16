@@ -5,7 +5,7 @@
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,11 +42,13 @@ namespace Data.Migrations
                 {
                     Id_Product = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductsName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Imagen = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     SongName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FilmName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Audio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id_Categories = table.Column<int>(type: "int", nullable: false)
+                    Audio = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Id_Categories = table.Column<int>(type: "int", nullable: false),
+                    Id_Products = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

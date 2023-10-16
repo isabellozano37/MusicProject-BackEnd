@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20230926103143_Initial")]
-    partial class Initial
+    [Migration("20231010112644_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,9 +94,9 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Product"));
 
-                    b.Property<string>("Audio")
+                    b.Property<byte[]>("Audio")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FilmName")
                         .IsRequired()
@@ -105,7 +105,14 @@ namespace Data.Migrations
                     b.Property<int>("Id_Categories")
                         .HasColumnType("int");
 
-                    b.Property<string>("Imagen")
+                    b.Property<int>("Id_Products")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Imagen")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ProductsName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

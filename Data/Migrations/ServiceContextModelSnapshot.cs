@@ -91,9 +91,9 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Product"));
 
-                    b.Property<string>("Audio")
+                    b.Property<byte[]>("Audio")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FilmName")
                         .IsRequired()
@@ -102,7 +102,14 @@ namespace Data.Migrations
                     b.Property<int>("Id_Categories")
                         .HasColumnType("int");
 
-                    b.Property<string>("Imagen")
+                    b.Property<int>("Id_Products")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Imagen")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ProductsName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
