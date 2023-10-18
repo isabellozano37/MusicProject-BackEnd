@@ -48,10 +48,12 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddScoped<IUsersService, UsersService>();
 
-builder.Services.AddDbContext<ServiceContext>(
- options =>
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IMylistsService, MyListsService>();
+builder.Services.AddScoped<IDetailListsService, DetailListService>();
+builder.Services.AddDbContext<ServiceContext>( options =>
 options.UseSqlServer("name=ConnectionStrings:ServiceContext"));
 
 var app = builder.Build();

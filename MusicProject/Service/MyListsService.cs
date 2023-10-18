@@ -5,7 +5,7 @@ using MusicProject.IService;
 
 namespace MusicProject.Service
 {
-    public class MyListsService : BaseContextService, IMyListsService
+    public class MyListsService : BaseContextService, IMylistsService
     {
         public MyListsService(ServiceContext serviceContext) : base(serviceContext)
         {
@@ -19,4 +19,5 @@ namespace MusicProject.Service
         }
 
     }
+
 }
