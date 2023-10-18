@@ -57,22 +57,22 @@ namespace MusicProject.Controllers
         }
 
 
-        //[HttpPut(Name = "UpdateMyLists")]
-        //public IActionResult UpdateMyLists(string Name_List, [FromBody] MyLists updatedMyLists)
-        //{
-        //    var user = _serviceContext.MyLists.FirstOrDefault(p => p.Name_List == Name_List);
-        //    if (user != null)
-        //    {
-        //        MyLists.Name_List = updatedMyLists.Name_List;
-                
-        //        _serviceContext.SaveChanges();
-        //        return Ok("La lista se ha actualizado correctamente.");
-        //    }
-        //    else
-        //    {
-        //        return NotFound("No se ha encontrado la lista con el identificador especificado.");
-        //    }
-        //}
+        [HttpPut(Name = "UpdateMyLists")]
+        public IActionResult UpdateMyLists(string Name_List, [FromBody] MyLists updatedMyLists)
+        {
+            var myLists = _serviceContext.MyLists.FirstOrDefault(p => p.Name_List == Name_List);
+            if (myLists != null)
+            {
+                myLists.Name_List = updatedMyLists.Name_List;
+
+                _serviceContext.SaveChanges();
+                return Ok("La lista se ha actualizado correctamente.");
+            }
+            else
+            {
+                return NotFound("No se ha encontrado la lista con el identificador especificado.");
+            }
+        }
 
 
 

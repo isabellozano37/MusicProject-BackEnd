@@ -4,7 +4,7 @@ namespace MusicProject.IService
 {
     public interface ICategoriesService
     {
-        int insertCategories (Categories Categories);
+        int InsertCategories (Categories Categories);
     }
 }
 

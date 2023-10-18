@@ -21,6 +21,41 @@ namespace MusicProject.Controllers
             _serviceContext = serviceContext;
         }
 
+        [HttpPost(Name = "InsertDetailList")]
+        public IActionResult Post([FromBody] DetailList DetailList)
+        {
+            return Ok(_detailListService.InsertDetailList(DetailList));
+
+        }
+        [HttpGet(Name = "GetDetailList")]
+        public IActionResult GetDetailList()
+        {
+            var DetailList = _serviceContext.DetailList.ToList();
+            return Ok(DetailList);
+        }
+
+
+        //[HttpDelete(Name = "DeleteDetailList")]
+        //public IActionResult DeleteDetailList(string MyLists)
+
+        //{
+        //    var DetailList = _serviceContext.MyLists.FirstOrDefault(p => p.MyLists == MyLists);
+        //    if (DetailList != null)
+        //    {
+        //        _serviceContext.DetailList.Remove(DetailList);
+        //        _serviceContext.SaveChanges();
+
+        //        return Ok("La lista se ha eliminado correctamente.");
+        //    }
+        //    else
+        //    {
+        //        return NotFound("No se ha encontrado la lista con el identificador especificado.");
+        //    }
+        //}
+
+
+
+
 
     }
 }
