@@ -49,14 +49,17 @@ namespace Data.Migrations
                     b.Property<int>("Id_MyLists")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id_Product")
+                    b.Property<int>("Id_Songs")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SongsId_Songs")
                         .HasColumnType("int");
 
                     b.HasKey("Id_DetailList");
 
                     b.HasIndex("Id_MyLists");
 
-                    b.HasIndex("Id_Product");
+                    b.HasIndex("SongsId_Songs");
 
                     b.ToTable("DetailList", (string)null);
                 });
@@ -83,13 +86,30 @@ namespace Data.Migrations
                     b.ToTable("MyLists", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Products", b =>
+            modelBuilder.Entity("Entities.Roll", b =>
                 {
-                    b.Property<int>("Id_Product")
+                    b.Property<int>("Id_Roll")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Product"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Roll"));
+
+                    b.Property<string>("Name_Roll")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_Roll");
+
+                    b.ToTable("Roll", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.Songs", b =>
+                {
+                    b.Property<int>("Id_Songs")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Songs"));
 
                     b.Property<string>("Audio")
                         .IsRequired()
@@ -110,28 +130,11 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id_Product");
+                    b.HasKey("Id_Songs");
 
                     b.HasIndex("Id_Categories");
 
-                    b.ToTable("Products", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.Roll", b =>
-                {
-                    b.Property<int>("Id_Roll")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Roll"));
-
-                    b.Property<string>("Name_Roll")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id_Roll");
-
-                    b.ToTable("Roll", (string)null);
+                    b.ToTable("Songs", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Users", b =>
@@ -180,15 +183,15 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Products", "Products")
+                    b.HasOne("Entities.Songs", "Songs")
                         .WithMany("DetailList")
-                        .HasForeignKey("Id_Product")
+                        .HasForeignKey("SongsId_Songs")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MyLists");
 
-                    b.Navigation("Products");
+                    b.Navigation("Songs");
                 });
 
             modelBuilder.Entity("Entities.MyLists", b =>
@@ -202,10 +205,10 @@ namespace Data.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("Entities.Products", b =>
+            modelBuilder.Entity("Entities.Songs", b =>
                 {
                     b.HasOne("Entities.Categories", "Categories")
-                        .WithMany("Products")
+                        .WithMany("Songs")
                         .HasForeignKey("Id_Categories")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -226,7 +229,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Entities.Categories", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Songs");
                 });
 
             modelBuilder.Entity("Entities.MyLists", b =>
@@ -234,7 +237,7 @@ namespace Data.Migrations
                     b.Navigation("DetailList");
                 });
 
-            modelBuilder.Entity("Entities.Products", b =>
+            modelBuilder.Entity("Entities.Songs", b =>
                 {
                     b.Navigation("DetailList");
                 });

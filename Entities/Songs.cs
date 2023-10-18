@@ -9,11 +9,11 @@ using System.Text.Json.Serialization;
 
 namespace Entities
 {
-    public class Products
+    public class Songs
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id_Product { get; set; }
+        public int Id_Songs { get; set; }
         public string Imagen { get; set; }
         public string SongName { get; set; }
         public string FilmName { get; set; }
@@ -24,6 +24,7 @@ namespace Entities
 
         [JsonIgnore]
         public virtual Categories Categories { get; set; }
+        [JsonIgnore]
         public ICollection<DetailList> DetailList { get; set; }
     }
 }

@@ -37,10 +37,10 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Songs",
                 columns: table => new
                 {
-                    Id_Product = table.Column<int>(type: "int", nullable: false)
+                    Id_Songs = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SongName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -50,9 +50,9 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id_Product);
+                    table.PrimaryKey("PK_Songs", x => x.Id_Songs);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_Id_Categories",
+                        name: "FK_Songs_Categories_Id_Categories",
                         column: x => x.Id_Categories,
                         principalTable: "Categories",
                         principalColumn: "Id_Categories",
@@ -110,7 +110,8 @@ namespace Data.Migrations
                     Id_DetailList = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Id_MyLists = table.Column<int>(type: "int", nullable: false),
-                    Id_Product = table.Column<int>(type: "int", nullable: false)
+                    Id_Songs = table.Column<int>(type: "int", nullable: false),
+                    SongsId_Songs = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,10 +123,10 @@ namespace Data.Migrations
                         principalColumn: "Id_MyLists",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DetailList_Products_Id_Product",
-                        column: x => x.Id_Product,
-                        principalTable: "Products",
-                        principalColumn: "Id_Product",
+                        name: "FK_DetailList_Songs_SongsId_Songs",
+                        column: x => x.SongsId_Songs,
+                        principalTable: "Songs",
+                        principalColumn: "Id_Songs",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -135,9 +136,9 @@ namespace Data.Migrations
                 column: "Id_MyLists");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetailList_Id_Product",
+                name: "IX_DetailList_SongsId_Songs",
                 table: "DetailList",
-                column: "Id_Product");
+                column: "SongsId_Songs");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MyLists_Id_Users",
@@ -145,8 +146,8 @@ namespace Data.Migrations
                 column: "Id_Users");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_Id_Categories",
-                table: "Products",
+                name: "IX_Songs_Id_Categories",
+                table: "Songs",
                 column: "Id_Categories");
 
             migrationBuilder.CreateIndex(
@@ -165,7 +166,7 @@ namespace Data.Migrations
                 name: "MyLists");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Songs");
 
             migrationBuilder.DropTable(
                 name: "Users");

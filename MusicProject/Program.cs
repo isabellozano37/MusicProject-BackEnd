@@ -49,6 +49,10 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<ISongsService, SongsService>();
+builder.Services.AddScoped<ICategoriesService, CategoriesService>();
+builder.Services.AddScoped<IMylistsService, MyListsService>();
+builder.Services.AddScoped<IDetailListService, DetailListService>();
 
 builder.Services.AddDbContext<ServiceContext>(
  options =>

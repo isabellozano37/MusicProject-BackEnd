@@ -17,6 +17,6 @@ namespace Entities
         public string Name_Categories { get; set; }
 
         [JsonIgnore]
-        public ICollection<Products> Products { get; set; }
+        public ICollection<Songs> Songs { get; set; }
     }
 }

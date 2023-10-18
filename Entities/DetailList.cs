@@ -22,9 +22,9 @@ namespace Entities
         public virtual MyLists MyLists { get; set; }
 
         [ForeignKey("Products")]
-        public int Id_Product { get; set; }
+        public int Id_Songs { get; set; }
 
         [JsonIgnore]
-        public virtual Products Products { get; set; }
+        public virtual Songs Songs { get; set; }
     }
 }

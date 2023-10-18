@@ -19,7 +19,7 @@ namespace Data
 
         public DbSet<Users> Users { get; set; }
         public DbSet<Roll> Roll { get; set; }
-        public DbSet<Products> Products { get; set; }
+        public DbSet<Songs> Songs { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<MyLists> MyLists { get; set; }
         public DbSet<DetailList> DetailList { get; set; }
@@ -35,9 +35,9 @@ namespace Data
                 entity.ToTable("Roll");
             });
 
-            builder.Entity<Products>(entity =>
+            builder.Entity<Songs>(entity =>
             {
-                entity.ToTable("Products");
+                entity.ToTable("Songs");
             });
             builder.Entity<Categories>(entity =>
             {
