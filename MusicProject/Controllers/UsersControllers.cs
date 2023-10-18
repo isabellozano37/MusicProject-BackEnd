@@ -81,6 +81,7 @@ namespace MusicProject.Controllers
             }
         }
 
+
         private string GenerateJwtToken(Users user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
