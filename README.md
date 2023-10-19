@@ -88,7 +88,7 @@ The "Program" refers to the entry point of the application. In the context of an
 
 ## Next Steps 🔜
 
-In the future, we intend to merge the Front-end (https://github.com/isabellozano37/music-projet) with this Back-end repository. The goal is to transform our audio playback web platform into a FullStack website. Additionally, we want to continue enhancing our database by storing a greater variety of music and soundstracks, making our audio platform site more attractive, not only visually as we have previously mentioned in the other repository but also by providing a more comprehensive sounds listen. Likewise, we will continue working on maintaining our FullStack website to make it increasingly stable and dynamic, allowing us to maximize performance both for us as administrators and for our customers.
+Once we have linked our Front-End project (https://github.com/isabellozano37/music-projet), we want to continue improving our database by storing a greater variety of music and soundtracks, making our audio platform site more attractive, not only visually as mentioned earlier in the other repository, but also by providing a more comprehensive listening experience. Likewise, we will continue to work on maintaining our FullStack website to make it increasingly stable and dynamic, allowing us to maximize performance both for ourselves as administrators and for our customers.
 
 ## Authors 👨‍💻👩‍💻
 
