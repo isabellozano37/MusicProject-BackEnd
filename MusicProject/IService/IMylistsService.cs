@@ -6,6 +6,5 @@ namespace MusicProject.IService
     {
         int InsertMyLists(MyLists MyLists);
 
-        //List<MyLists> GetMyLists(string Name_MyLists);
     }
 }
