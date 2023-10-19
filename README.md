@@ -4,7 +4,7 @@
 
 ## Project Description 🚀
 
-"MusicProject-BackEnd" is the continuation of the "Music-Project" project (https://github.com/isabellozano37/music-project). As previously mentioned, this project aims to create a highly functional and secure audio playback web platform. This platform will allow users to access and enjoy a wide variety of audio content, including music, movie soundtracks, series, and more, with a focus on security and user experience. In this repository, we have worked on the Back-end content related to the database. We have built an application to store all the audio data for our audio playback web platform. Additionally, it will be where we implement the security of our website.
+"MusicProject-BackEnd" is the continuation of the "SoundTracks Magic" project (https://github.com/isabellozano37/music-project). As previously mentioned, this project aims to create a highly functional and secure audio playback web platform. This platform will allow users to access and enjoy a wide variety of audio content, including music, movie soundtracks, series, and more, with a focus on security and user experience. In this repository, we have worked on the Back-end content related to the database. We have built an application to store all the audio data for our audio playback web platform. Additionally, it will be where we implement the security of our website.
 
 ## Screenshots 📷
 
@@ -40,6 +40,10 @@
 - Dev: It's the branch where different working codes are integrated into one and where preliminary testing is done before production. It's an intermediate and/or safety branch. <br>
 - Independents: These are different branches where each team member develops their code according to assigned tasks for later merging into the Dev branch. It's an independent and/or testing branch. <br>
 + The branch methodology allows us to work collaboratively and maintain an organized and efficient workflow. Furthermore, working in branches allows us to work freely without conflicting with the work of other team members. Additionally, it provides us with greater control and a record or history of the various changes being made. On the other hand, for added security when merging codes from different branches, we have implemented security rules on GitHub where it is necessary to create a pull request prior to the merge.
+
+## Test Screenshot ✔️
+
+
 
 ## Installation Process ⬆️
 1. Clone the GitHub repository: https://github.com/isabellozano37/MusicProject-BackEnd.
