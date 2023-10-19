@@ -8,7 +8,7 @@
 
 ## Screenshots 📷
 
-<img src="Back1.png" width="auto" height="200"><img src="Back2.png" width="auto" height="200"><img src="Back3.png" width="auto" height="200"><img src="Back4.png" width="auto" height="150">
+<img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712580/Back2_kakl8b.png" width="auto" height="200"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712580/Back3_zfunmt.png" width="auto" height="200"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712580/Back10_yoqwle.png" width="auto" height="200"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712580/Back7_zqx8cu.png" width="auto" height="150"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712580/Back5_uiw75f.png" width="auto" height="150"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712581/Back4_lygop6.png" width="auto" height="150"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712581/Back8_f1wpwh.png" width="auto" height="150"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712581/Back6_e5xnut.png" width="auto" height="150"><img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712581/Back9_tw9rlf.png" width="auto" height="150">
 
 ## Stacks 🖥️
 ● Microsoft Visual Studio 2022 <br>
@@ -43,7 +43,7 @@
 
 ## Test Screenshot ✔️
 
-
+<img src="https://res.cloudinary.com/duwenv0yr/image/upload/v1697712580/Test_c0lzyh.png" width="auto" height="400">
 
 ## Installation Process ⬆️
 1. Clone the GitHub repository: https://github.com/isabellozano37/MusicProject-BackEnd.
