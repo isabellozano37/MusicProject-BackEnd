@@ -16,5 +16,14 @@ namespace MusicProject.Service
             _serviceContext.SaveChanges();
             return Songs.Id_Songs;
         }
+
+        public List<Songs> GetSongsByCategory(int categoryId)
+        {
+            return _serviceContext.Songs
+                .Where(s => s.Id_Categories == categoryId)
+                .ToList();
+        }
+
+
     }
 }

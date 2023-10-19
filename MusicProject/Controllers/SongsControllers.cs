@@ -44,6 +44,28 @@ namespace MusicProject.Controllers
 
         }
 
+        [HttpGet("GetSongsByCategory/{categoryId}")]
+        public IActionResult GetSongsByCategory(int categoryId)
+        
+        {
+            try
+            {
+                List<Songs> songs = _songsService.GetSongsByCategory(categoryId);
+
+                if (songs == null || songs.Count == 0)
+                {
+                    return NotFound("No se encontraron canciones para la categoría especificada.");
+                }
+
+                return Ok(songs);
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                return StatusCode(500, "Error interno del servidor: " + ex.Message);
+            }
+        }
+
         [HttpDelete(Name = "DeleteSongs")]
         public IActionResult DeleteSongs(string SongName)
         {
