@@ -11,11 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-<<<<<<<< HEAD:Data/Migrations/20231013100646_Initial.Designer.cs
-    [Migration("20231013100646_Initial")]
-========
-    [Migration("20230926103143_Initial")]
->>>>>>>> 011958739df9a6d253f8c7763a1d0da77bdc7369:Data/Migrations/20230926103143_Initial.Designer.cs
+    [Migration("20231019073454_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
