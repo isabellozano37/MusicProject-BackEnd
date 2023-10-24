@@ -18,11 +18,38 @@ namespace Data
         public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
 
         public DbSet<Users> Users { get; set; }
+        public DbSet<Roll> Roll { get; set; }
+        public DbSet<Songs> Songs { get; set; }
+        public DbSet<Categories> Categories { get; set; }
+        public DbSet<MyLists> MyLists { get; set; }
+        public DbSet<DetailList> DetailList { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Users>(entity =>
             {
                 entity.ToTable("Users");
+            });
+
+            builder.Entity<Roll>(entity =>
+            {
+                entity.ToTable("Roll");
+            });
+
+            builder.Entity<Songs>(entity =>
+            {
+                entity.ToTable("Songs");
+            });
+            builder.Entity<Categories>(entity =>
+            {
+                entity.ToTable("Categories");
+            });
+            builder.Entity<MyLists>(entity =>
+            {
+                entity.ToTable("MyLists");
+            });
+            builder.Entity<DetailList>(entity =>
+            {
+                entity.ToTable("DetailList");
             });
         }
     }

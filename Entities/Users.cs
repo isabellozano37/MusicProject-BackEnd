@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Entities
 {
@@ -13,12 +13,20 @@ namespace Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id_Usuario { get; set; }
-        public string Nombre_Usuario { get; set; }
-        public string Apellidos_Usuario { get; set; }
-        public string Direccion_Usuario { get; set; }
-        public string Telefono { get; set; }
+        public int Id_Users { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
-        public string Contraseña { get; set; }
+        public string Password { get; set; }
+
+        [ForeignKey("Roll")]
+        public int Id_Roll { get; set; }
+
+        [JsonIgnore]
+        public virtual Roll Roll { get; set; }
+
+        [JsonIgnore]
+        public ICollection<MyLists> MyLists { get; set; }
     }
 }
